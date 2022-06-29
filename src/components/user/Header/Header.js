@@ -1,5 +1,5 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import '../../../assets/css/user/style.css';
 import './header.css';
@@ -13,14 +13,8 @@ import {
   hideNav,
 } from './handle.js';
 
-
-
 function Header() {
-
-  const getdata = useSelector((state)=> state.cartreducer.carts);
-
-
-
+  const getdata = useSelector((state) => state.cartreducer.carts);
 
   return (
     <>
@@ -50,26 +44,27 @@ function Header() {
             <input placeholder='Tìm kiếm theo từ khóa' />
             <i className='fa-solid fa-magnifying-glass'></i>
           </div>
-          <NavLink to='/login'>
+          <NavLink to='/userInfo'>
             <i className='fa-solid fa-user'></i>
           </NavLink>
           <NavLink to='/cart'>
             <i className='fa-solid fa-cart-shopping position-relative'>
-              {getdata.length === 0 ? <span></span>
-              : 
-              <span className="position-absolute top-0 start-100 translate-middle rounded"
-              style = {{
-                fontSize: '0.6rem',
-                padding: '0.2rem 0.2rem 0rem 0.2rem',
-                backgroundColor: 'white',
-                border:' 1px solid purple',
-                color: 'green'
-              }}
-              >
-                {getdata.length}
-              </span>
-              
-              }
+              {getdata.length === 0 ? (
+                <span></span>
+              ) : (
+                <span
+                  className='position-absolute top-0 start-100 translate-middle rounded'
+                  style={{
+                    fontSize: '0.6rem',
+                    padding: '0.2rem 0.2rem 0rem 0.2rem',
+                    backgroundColor: 'white',
+                    border: ' 1px solid purple',
+                    color: 'green',
+                  }}
+                >
+                  {getdata.length}
+                </span>
+              )}
             </i>
           </NavLink>
         </div>

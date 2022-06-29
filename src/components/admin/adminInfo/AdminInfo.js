@@ -13,7 +13,7 @@ function AdminInfo() {
             alt='admin avatar'
             className='adminAvatar'
           ></img>
-          <span className='ms-2 fw-bold'>Nhóm Em</span>
+          <span className='ms-2 fw-bold'>Cara Shop</span>
           <div className='adminInfo-dropdown'>
             <ul>
               <li>
