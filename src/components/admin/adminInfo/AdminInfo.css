@@ -29,6 +29,7 @@
 
 .adminInfo-dropdown li a {
   color: black;
+  text-decoration: none;
 }
 
 .adminInfo-dropdown li:hover a {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import productService from '../../../service/productService';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Swal from 'sweetalert2';
@@ -12,6 +12,9 @@ import './product.css';
 import './mobile.css';
 
 function Product() {
+
+  let loginUser = localStorage.getItem('loginUser');
+  let navigate = useNavigate();
   const { id } = useParams();
   const [products, setProducts] = useState();
   const dispatch = useDispatch();
@@ -114,14 +117,28 @@ function Product() {
                 <button
                   className='btn btn-danger'
                   onClick={() => {
-                    send(products);
-                    Swal.fire({
-                      position: 'top-center',
-                      icon: 'success',
-                      title: 'Đã Thêm Vào Giỏ Hàng',
-                      showConfirmButton: false,
-                      timer: 1000,
-                    });
+                    if(loginUser){
+                      send(products);
+                      Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: 'Đã Thêm Vào Giỏ Hàng',
+                        showConfirmButton: false,
+                        timer: 1000,
+                      });
+                    }else{
+                      Swal.fire({
+                        position: 'top-center',
+                        icon: 'warning',
+                        title: 'Bạn cần đăng nhập để mua hàng',
+                        showConfirmButton: false,
+                        timer: 1000,
+                      });
+                      navigate('/login')
+                    }
+
+
+    
                   }}
                 >
                   Thêm Vào Giỏ Hàng

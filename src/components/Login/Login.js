@@ -5,19 +5,20 @@ import loginSignupService from '../../service/loginSignupService';
 import Swal from 'sweetalert2';
 
 function Login() {
-  let navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState();
+  let navigate = useNavigate(); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errMess, setErrMess] = useState('');
-  let loginUser = localStorage.getItem('loginUser');
-  console.log('loginuser: ' + loginUser);
+
+
 
   const emailRef = useRef();
 
   useEffect(() => {
     emailRef.current.focus();
   }, []);
+
+
 
   const forgetPass = async (e) => {
     const { value: email } = await Swal.fire({
@@ -64,13 +65,8 @@ function Login() {
             icon: 'success',
             title: 'Đăng Nhập Thành Công!',
             showConfirmButton: false,
-            timer: 1000,
+            timer: 700,
           });
-
-          setTimeout(() => {
-            navigate('/userInfo');
-            window.location.reload();
-          }, 700);
         } else {
           setErrMess(`*Sai email hoặc mật khẩu`);
           console.log(`Login faile`);
@@ -79,10 +75,18 @@ function Login() {
       })
       .then((data) => {
         loginSignupService.getUser(data.data.id).then((res) => {
-          console.log(res.data.data);
-          setCurrentUser(res.data.data);
           saveCurrentUser(res.data.data);
+          if(res.data.data.isAdmin){
+            navigate('/admin')
+          }else{
+            navigate('/userInfo')
+          }
+          
+          setTimeout(window.location.reload(),1000)
+
         });
+        
+        
       })
       .catch(function (err) {
         console.error('err: ' + err);

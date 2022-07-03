@@ -1,6 +1,7 @@
 import Header from './../Header/Header';
 import './userInfo.css';
 import { range } from '../../../helper/functions';
+import Swal from 'sweetalert2';
 
 export default function UserInfo() {
   let userLoggedin = JSON.parse(localStorage.getItem('loginUser'));
@@ -31,8 +32,19 @@ export default function UserInfo() {
                 <button
                   className='btn btn-danger mt-3'
                   onClick={() => {
-                    logout();
-                    window.location.reload();
+                    Swal.fire({
+                      title: 'Bạn có chắc đăng xuất không?',
+                      showDenyButton: true,
+                      showCancelButton: true,
+                      showConfirmButton: false,
+                      denyButtonText: `Đăng xuất`,
+                    }).then((result) => {
+                       if (result.isDenied) {
+                      logout();
+                      window.location.reload();
+                      }
+                    })
+
                   }}
                 >
                   Đăng xuất
@@ -48,9 +60,7 @@ export default function UserInfo() {
                     <input
                       type='text'
                       className='form-control mb-3'
-                      defaultValue={
-                        userLoggedin.firstName + userLoggedin.lastName
-                      }
+                      defaultValue={`${userLoggedin.firstName} ${userLoggedin.lastName}`}
                     />
                   </div>
                 </div>

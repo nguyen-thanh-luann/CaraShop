@@ -24,6 +24,8 @@ function Signup() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [validPhoneNumber, setValidPhoneNumber] = useState(false);
 
+  const [address, setAddress] = useState('');
+
   const [password, setPassword] = useState('');
   const [validPassword, setValidPassword] = useState(false);
 

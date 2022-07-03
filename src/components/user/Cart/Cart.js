@@ -10,7 +10,10 @@ import Swal from 'sweetalert2';
 import './cart.css';
 import './mobile.css';
 import { Link , useNavigate} from 'react-router-dom';
+import { login } from '../../../service/loginSignupService';
 function Cart() {
+   
+  let loginUser = JSON.parse(localStorage.getItem('loginUser'));
 
   let Navigate = useNavigate();
   let vndFormat = Intl.NumberFormat('vi-VN')
@@ -106,9 +109,9 @@ const getDetailPage = (id) => {
                   <span>Giao tới</span>
                   <hr/>
                   <div>
-                    <span className='fs-4 fw-bold'>Nguyễn Phùng Thảo Nguyên<br/></span>
-                    <span className='fw-bold'>Sdt: 070 7654 817<br/></span>
-                    <span> Phường Trung Mỹ Tây, Quận 12, Hồ Chí Minh</span>
+                    <span className='fs-4 fw-bold'>{`${loginUser.firstName} ${loginUser.lastName}`}<br/></span>
+                    <span className='fw-bold'>Sdt: {loginUser.phoneNumber}<br/></span>
+                    <span>{loginUser.address}</span>
                   </div>
                 </div>
                 <div className='mt-4'>
@@ -175,9 +178,9 @@ const getDetailPage = (id) => {
                       <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                      <p className="fw-bold">Giao Đến:  Nguyễn Phùng Thảo Nguyên</p>
-                      <p className="fw-bold">Sdt: 070 7654 817</p>
-                      <p className="fw-bold">Địa chỉ: Phường Trung Mỹ Tây, Quận 12, Hồ Chí Minh.</p>
+                      <p className="fw-bold">Giao Đến:  {`${loginUser.firstName} ${loginUser.lastName}`}</p>
+                      <p className="fw-bold">Sdt: {loginUser.phoneNumber}</p>
+                      <p className="fw-bold">Địa chỉ: {loginUser.address}</p>
                       <hr/>
                       <div className='d-flex justify-content-between'>
                         <span>Tạm tính</span>

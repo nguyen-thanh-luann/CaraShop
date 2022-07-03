@@ -3,7 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 function AdminInfo() {
-  const nav = useNavigate();
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.removeItem('loginUser');
+  };
   return (
     <>
       <div className='d-flex align-items-center me-3'>
@@ -19,32 +22,30 @@ function AdminInfo() {
               <li>
                 <button>
                   <i className='me-1 fa-solid fa-user'></i>
-                  <Link to='/admin'>Hồ sơ</Link>
-                </button>
-              </li>
-              <li>
-                <button>
-                  <i className='me-1 fa-solid fa-gear'></i>
-                  <Link to='/admin'>Cài đặt</Link>
+                  <Link to='/userInfo'>Hồ sơ</Link>
                 </button>
               </li>
               <li>
                 <button
                   onClick={function () {
                     Swal.fire({
-                      title: 'Bạn có chắc muốn đăng xuất',
-                      icon: 'warning',
+                      title: 'Bạn có chắc đăng xuất không?',
                       showDenyButton: true,
-                      confirmButtonText: 'Có',
-                      denyButtonText: `Không`,
+                      showCancelButton: true,
+                      showConfirmButton: false,
+                      denyButtonText: `Đăng xuất`,
                     }).then((result) => {
-                      if (result.isConfirmed) {
-                        nav('/login');
+                       if (result.isDenied) {
+                      logout();
+                      navigate('/login')
                       }
-                    });
+                    })
                   }}
                 >
-                  <i className='me-1 fa-solid fa-right-from-bracket'></i>
+                  <i 
+                  className='me-1 fa-solid fa-right-from-bracket'
+                  
+                  ></i>
                   Đăng Xuất
                 </button>
               </li>
