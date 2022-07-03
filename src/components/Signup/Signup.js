@@ -9,14 +9,16 @@ const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
 function Signup() {
-  const lastNameRef = useRef();
+  const firstNameRef = useRef();
+  
+  const [firstName, setFirstName] = useState('');
+  const [validFirstName, setValidFirstName] = useState(false);
+  const [firstNameFocus, setFirstNameFocus] = useState(false);
 
   const [lastName, setLastName] = useState('');
   const [validLastName, setValidLastName] = useState(false);
-  const [lastNameFocus, setLastNameFocus] = useState(false);
 
-  const [firstName, setFirstName] = useState('');
-  const [validFirstName, setValidFirstName] = useState(false);
+
 
   const [email, setEmail] = useState('');
   const [validEmail, setValidEmail] = useState(false);
@@ -64,6 +66,7 @@ function Signup() {
         lastName: lastName,
         email: email,
         phoneNumber: phoneNumber,
+        address: address,
         pw: password,
       };
 
@@ -107,25 +110,26 @@ function Signup() {
                 <h6>
                   <span
                     className={
-                      validLastName || !lastName ? 'd-none' : 'd-block'
+                      validFirstName || !firstName ? 'd-none' : 'd-block'
                     }
                   >
                     <i className='fa-solid fa-xmark'></i>Không hợp lệ
                   </span>
-                  <span className={validLastName ? 'd-block' : 'd-none'}>
+                  <span className={validFirstName ? 'd-block' : 'd-none'}>
                     <i className='fa-solid fa-check text-success fs-5'></i>
                   </span>
                 </h6>
               </label>
               <input
-                id='lastName'
-                ref={lastNameRef}
+                id='firstName'
+                className='form-control'
+                ref={firstNameRef}
                 type='text'
-                onChange={(e) => setLastName(e.target.value)}
-                value={lastName}
-                aria-invalid={validLastName ? 'false' : 'true'}
-                onFocus={() => setLastNameFocus(true)}
-                onBlur={() => setLastNameFocus(false)}
+                onChange={(e) => setFirstName(e.target.value)}
+                value={firstName}
+                aria-invalid={validFirstName ? 'false' : 'true'}
+                onFocus={() => setFirstNameFocus(true)}
+                onBlur={() => setFirstNameFocus(false)}
                 required
               />
             </div>
@@ -136,22 +140,23 @@ function Signup() {
                 <h6>
                   <span
                     className={
-                      validFirstName || !firstName ? 'd-none' : 'd-block'
+                      validLastName || !lastName ? 'd-none' : 'd-block'
                     }
                   >
                     <i className='fa-solid fa-xmark'></i>Không hợp lệ (nhiều hơn
                     1 kí tự)
                   </span>
-                  <span className={validFirstName ? 'd-block' : 'd-none'}>
+                  <span className={validLastName ? 'd-block' : 'd-none'}>
                     <i className='fa-solid fa-check text-success fs-5'></i>
                   </span>
                 </h6>
               </label>
               <input
-                id='firstName'
+                id='lastName'
+                className='form-control'
                 type='text'
-                onChange={(e) => setFirstName(e.target.value)}
-                value={firstName}
+                onChange={(e) => setLastName(e.target.value)}
+                value={lastName}
                 required
               />
             </div>
@@ -170,6 +175,7 @@ function Signup() {
               </label>
               <input
                 id='email'
+                className='form-control'
                 type='email'
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
@@ -195,6 +201,7 @@ function Signup() {
               </label>
               <input
                 id='phoneNumber'
+                className='form-control'
                 type='tel'
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 value={phoneNumber}
@@ -202,9 +209,24 @@ function Signup() {
               />
             </div>
 
+
+            <div className='inputGroup'>
+              <label htmlFor='address'>
+               Địa chỉ:
+              </label>
+              <textarea
+                id='address'
+                className='form-control'
+                type='text'
+                onChange={(e) => setAddress(e.target.value)}
+                value={address}
+                required
+              ></textarea>
+            </div>
+
             <div className='inputGroup'>
               <label htmlFor='password'>
-                Mật Khẩu:
+                Mật khẩu:
                 <h6>
                   <span
                     className={
@@ -221,6 +243,7 @@ function Signup() {
               </label>
               <input
                 id='password'
+                className='form-control'
                 type='password'
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
@@ -250,6 +273,7 @@ function Signup() {
               </label>
               <input
                 id='passwordConfirm'
+                className='form-control'
                 type='password'
                 onChange={(e) => setCfmPassword(e.target.value)}
                 value={cfmPassword}
