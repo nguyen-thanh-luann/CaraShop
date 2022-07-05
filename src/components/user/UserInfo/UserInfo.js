@@ -15,14 +15,14 @@ export default function UserInfo() {
   return (
     <>
       <Header />
-      <div className='container'>
+      <div className='container userInfo'>
         <h3 className='mt-4'>Thông tin tài khoản</h3>
-        <div className='row border rounded py-3'>
-          <div className='col'>
+        <div className='row border rounded p-2'>
+          <div className='left-col col-xs-12 col-sm-12 col-lg-6 col-xl-6'>
             {/*  */}
             <h6>Thông tin cá nhân</h6>
             <div className='row'>
-              <div className='col-3 pe-0'>
+              <div className='col-xs-12 col-sm-12 col-lg-3 pe-0 m-sm-auto avt-group'>
                 <div className='avt'>
                   <img
                     src={require('../../../assets/img/people/adminAvatar.jpg')}
@@ -50,7 +50,7 @@ export default function UserInfo() {
                   Đăng xuất
                 </button>
               </div>
-              <div className='col ps-0'>
+              <div className='col-xs-12 col-sm-12 col-lg-9  ps-0'>
                 {/* name */}
                 <div className='row mt-3 align-items-center'>
                   <div className='col-3'>
@@ -151,8 +151,8 @@ export default function UserInfo() {
                     </div>
                   </div>
                 </div>
-                <div className='row mt-3'>
-                  <button className='btn btn-outline-primary w-25'>
+                <div className='row mt-3 ms-2'>
+                  <button className='btn btn-outline-primary w-100'>
                     Cập nhật
                   </button>
                 </div>
@@ -160,7 +160,7 @@ export default function UserInfo() {
             </div>
           </div>
           {/*  */}
-          <div className='col '>
+          <div className='right-col col-xs-12 col-sm-12 col-lg-6 col-xl-6 '>
             <h6>Số điện thoại và Email</h6>
             <div className='row align-items-center'>
               <div className='col'>
@@ -181,11 +181,11 @@ export default function UserInfo() {
                   </div>
                 </div>
               </div>
-              <div className='col col-3'>
-                <button className='btn btn-outline-primary '>Cập nhật</button>
+              <div className='col-sm-12 col-lg-3'>
+                <button className='btn btn-outline-primary w-75'>Cập nhật</button>
               </div>
             </div>
-            <div className='row align-items-center'>
+            <div className='row align-items-center mt-3'>
               <div className='col'>
                 <div className='row my-2'>
                   <div className='col d-flex'>
@@ -204,11 +204,11 @@ export default function UserInfo() {
                   </div>
                 </div>
               </div>
-              <div className='col col-3'>
-                <button className='btn btn-outline-primary'>Cập nhật</button>
+              <div className='col-sm-12 col-lg-3'>
+                <button className='btn btn-outline-primary w-75'>Cập nhật</button>
               </div>
             </div>
-            <h6>Bảo mật</h6>
+            <h6 className='mt-3'>Bảo mật</h6>
             <div className='row align-items-center'>
               <div className='col'>
                 <div className='row mt-2'>
@@ -228,21 +228,22 @@ export default function UserInfo() {
                   </div>
                 </div>
               </div>
-              <div className='col col-3'>
-                <button className='btn btn-outline-primary'>Cập nhật</button>
+              <div className='col-sm-12 col-lg-3'>
+                <button className='btn btn-outline-primary w-75'>Cập nhật</button>
               </div>
             </div>
-            <h6>Địa chỉ </h6>
+            <h6 className='mt-3'>Địa chỉ </h6>
             <div className='row align-items-center'>
               <div className='col'>
                 <textarea
                   className='form-control '
                   cols='7'
+                  rows='7'
                   defaultValue={userLoggedin.address}
                 ></textarea>
               </div>
-              <div className='col-3'>
-                <button className='btn btn-outline-primary'>Cập nhật</button>
+              <div className='col-sm-12 col-lg-3 mt-2'>
+                <button className='btn btn-outline-primary w-75'>Cập nhật</button>
               </div>
             </div>
           </div>

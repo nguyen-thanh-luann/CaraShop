@@ -17,27 +17,20 @@
 
 .navInfo {
   display: flex;
-  align-items: center;
+  align-items:flex-end;
+  /* margin-left: 25%; */
+
+}
+
+.navInfo .title{
+  margin-left: 0.4rem;
 }
 
 .navInfo i {
   font-size: 1.2rem;
 }
 
-#searchGroup {
-  border: 1px solid black;
-  padding: 0.2rem;
-  border-radius: 5px;
-}
 
-#searchGroup input {
-  border: none;
-  background-color: #e3e6f3;
-}
-
-#searchGroup input:focus {
-  outline: none;
-}
 
 #closeNavBtn,
 #toggleBtn {

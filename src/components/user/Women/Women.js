@@ -9,6 +9,24 @@ import { Link, useNavigate } from 'react-router-dom';
 function Women() {
 
   const [products, setProducts] = useState([]);
+  const [searchValue, setSearchValue] = useState();
+
+  const searchProduct = () => {
+    if(searchValue){
+      productService.searchProductByCateAndName(2, searchValue)
+      .then((response) => {
+        console.log(response.data.data);
+        setProducts(response.data.data)
+      })
+      .then((data) => {
+        console.log('data: ' + data);
+      })
+      .catch((err) => console.log(err))
+    }else{
+      console.log(false)
+    }
+  }
+
   let Navigate = useNavigate();
 
   const loadProducts = () => {
@@ -50,6 +68,19 @@ function Women() {
       <div className='title'>
         <h3>Sản Phẩm Bán Chạy</h3>
       </div>
+      <div className='pro-container'>
+            <div id='searchGroup'>
+              <input 
+              className=''
+              placeholder='Tìm kiếm theo từ khóa' 
+              onChange={(e) => {
+                setSearchValue(e.target.value)
+                searchProduct();
+              }}
+              />
+              <i className='fa-solid fa-magnifying-glass'></i>
+          </div>
+      </div>
         <div className='pro-container'>
 
           {
@@ -90,15 +121,6 @@ function Women() {
           className='img-fluid'
         ></img>
       </div>
-
-      {/* pagination */}
-      {/* <section id='pagination' className='section-p1'>
-        <a href='#'>1</a>
-        <a href='#'>2</a>
-        <a href='#'>
-          <i className='fa-solid fa-arrow-right'></i>
-        </a>
-      </section> */}
       <Footer />
     </>
   );

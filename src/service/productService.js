@@ -4,6 +4,10 @@ const getAllProducts = () => {
     return api.get('/products');
 }
 
+const searchProductByCateAndName = (cateId, name) => {
+    return api.get(`/products/${cateId}/search_name?name=${name}`)
+}
+
 const getProductByType = (typeId) => {
     return api.get(`/products/category/${typeId}`)
 }
@@ -31,4 +35,4 @@ const addImgFile = (data) => {
 }
 
 
-export default {getAllProducts, getProductByType, getOneProduct,deleteProduct, updateProduct, addProduct, addImgFile}
+export default {getAllProducts, getProductByType, getOneProduct,deleteProduct, updateProduct, addProduct, addImgFile, searchProductByCateAndName}

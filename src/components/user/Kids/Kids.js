@@ -8,6 +8,24 @@ import { Link, useNavigate } from 'react-router-dom';
 function Kids() {
 
   const [products, setProducts] = useState([]);
+  const [searchValue, setSearchValue] = useState();
+
+  const searchProduct = () => {
+    if(searchValue){
+      productService.searchProductByCateAndName(3, searchValue)
+      .then((response) => {
+        console.log(response.data.data);
+        setProducts(response.data.data)
+      })
+      .then((data) => {
+        console.log('data: ' + data);
+      })
+      .catch((err) => console.log(err))
+    }else{
+      console.log(false)
+    }
+  }
+  
   let Navigate = useNavigate();
 
   const loadProducts = () => {
@@ -47,6 +65,19 @@ function Kids() {
         
       <div className='title'>
         <h3>Sản Phẩm Bán Chạy</h3>
+      </div>
+      <div className='pro-container'>
+            <div id='searchGroup'>
+              <input 
+              className=''
+              placeholder='Tìm kiếm theo từ khóa' 
+              onChange={(e) => {
+                setSearchValue(e.target.value)
+                searchProduct();
+              }}
+              />
+              <i className='fa-solid fa-magnifying-glass'></i>
+          </div>
       </div>
         <div className='pro-container'>
 

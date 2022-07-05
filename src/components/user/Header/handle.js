@@ -43,12 +43,16 @@ export const ToggleBtn = styled.button`
 
 export function showNav() {
   let mynav = document.querySelector('.navLinkGroup');
-  console.log(mynav);
+  let cartIcon = document.querySelector('.cart-icon');
   mynav.classList.remove('hide');
+  cartIcon.classList.add('d-none');
+
 }
 
 export function hideNav() {
   let mynav = document.querySelector('.navLinkGroup');
-  console.log(mynav);
+  let cartIcon = document.querySelector('.cart-icon');
   mynav.classList.add('hide');
+  cartIcon.classList.remove('d-none');
+
 }

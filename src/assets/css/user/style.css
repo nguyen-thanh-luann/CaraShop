@@ -94,3 +94,23 @@ body {
 .table tr:hover {
   background-color: rgb(240, 226, 250);
 }
+
+
+#searchGroup {
+  border: 1px solid black;
+  padding: 0.2rem;
+  border-radius: 5px;
+  width: 25%;
+
+}
+
+#searchGroup input {
+  border: none;
+  width: 90%;
+
+
+}
+
+#searchGroup input:focus {
+  outline: none;
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useSelector } from 'react-redux';
 
 import '../../../assets/css/user/style.css';
@@ -15,7 +15,12 @@ import {
 
 function Header() {
   const getdata = useSelector((state) => state.cartreducer.carts);
+  const [searchValue, setSearchValue] = useState();
+  
 
+  const searchProduct = () => {
+    console.log(searchValue);
+  }
   return (
     <>
       <section id='header'>
@@ -40,15 +45,12 @@ function Header() {
         </NavMenu>
 
         <div className='navInfo'>
-          <div id='searchGroup'>
-            <input placeholder='Tìm kiếm theo từ khóa' />
-            <i className='fa-solid fa-magnifying-glass'></i>
-          </div>
           <NavLink to='/userInfo'>
             <i className='fa-solid fa-user'></i>
+            <span className='title'>Thông tin cá nhân</span>
           </NavLink>
           <NavLink to='/cart'>
-            <i className='fa-solid fa-cart-shopping position-relative'>
+            <i className='fa-solid fa-cart-shopping position-relative cart-icon'>
               {getdata.length === 0 ? (
                 <span></span>
               ) : (
@@ -66,6 +68,7 @@ function Header() {
                 </span>
               )}
             </i>
+           <span className='title'>Giỏ hàng</span>
           </NavLink>
         </div>
         <div>

@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import AdminSidebar from '../SideBar/AdminSidebar';
 import productService from '../../../service/productService'; 
-import categoryService from '../../../service/categoryService';
 import AdminInfo from '../adminInfo/AdminInfo';
-import { useNavigate } from "react-router-dom";
 
 import '../../../assets/css/admin/style.css';
 import '../../../assets/css/admin/style.css';
@@ -20,21 +18,17 @@ function ProductManagement() {
   const [productDescr, setProductDescr] = useState('');
   const [productNum, setProductNum] = useState('');
   const [cateId, setCateId] = useState('');
-  const [cates, setCates] = useState();
 
   const uploadedImage = React.useRef(null);
   const imageUploader = React.useRef(null);
 
   const changedImage = React.useRef(null);
   const imageChanger = React.useRef(null);
-
-  const navigator = useNavigate();
   
   const [file, setFile] = useState();
   const [image, setImage] = useState();
 
   const [products, setProducts] = useState([]);
-  const [product, setProduct] = useState([]);
 
   let vndFormat = Intl.NumberFormat('vi-VN')
 
@@ -51,23 +45,6 @@ function ProductManagement() {
       .catch((err) => {console.log(err)})
   }
 
-  const getAProduct = (id) => {
-    productService.getOneProduct(id)
-    .then((res) => {
-      setProduct(res.data.data);
-    })
-  }
-
-  const loadCategory = () => {
-    categoryService.getAllCategories()
-    .then((response) => {
-      setCates(response.data.data)
-    })
-    .catch((err) => {
-        console.log(`err: ${err}`)
-    })
-}
-
   const loadProductsByCate=  (cateId) => {
     productService.getProductByType(cateId)
     .then((result) =>{
@@ -78,7 +55,6 @@ function ProductManagement() {
 
   useEffect(() => {
     loadProducts();
-    loadCategory();
   }, []);
 
   const getProduct = function (id) {
@@ -103,7 +79,6 @@ function ProductManagement() {
   }
 
   const addnewProduct = (e) => {
-    window.location.reload();
     let gend = '';
     if (productType === '1') {
       gend = 'Nữ';
@@ -123,8 +98,7 @@ function ProductManagement() {
       price: productPrice,
       stock: productNum,
     };
-
-    productService.addProduct(productType, newPro).then(() => {
+productService.addProduct(productType, newPro).then(() => {
       console.log('Add new Product Success');
       Swal.fire({
         position: 'top-center',
@@ -134,7 +108,6 @@ function ProductManagement() {
         timer: 1000,
       });
       loadProducts();
-      loadCategory();
     }).catch((err) => {console.log(`add new product problem: ${err}`)})
   };
 
@@ -232,7 +205,7 @@ function ProductManagement() {
                 <div className='searchGroup'>
                   <i className='fa-solid fa-magnifying-glass'></i>
                   <input
-                    type='text'
+type='text'
                     className='ms-2'
                     placeholder='Tìm Kiếm...'
                   />
@@ -248,21 +221,10 @@ function ProductManagement() {
                   }}
                   >
                     <option value='all'>Tất Cả</option>
-
-                   {
-                    cates ?  (cates.map((cate) => (
-                      <option key={cates.id} value={cate.id}>{cate.name}</option>
-                    )))
-                    :
-
-                   <>
                     <option value='1'>Quần áo nam</option>
                     <option value='2'>Quần áo nữ</option>
                     <option value='3'>Đồ trẻ em</option>
                     <option value='4'>Đồ trẻ sơ sinh</option>
-                   </>
-                   }
-
                   </select>
                 </div>
               </div>
@@ -313,9 +275,8 @@ function ProductManagement() {
                         data-bs-toggle='modal'
                         data-bs-target='#editProductModal'
                         onClick={function () {
-                          // setProductId(product.id);
-                          // getProduct(product.id);
-                          getAProduct(product.id);
+                          setProductId(product.id);
+                          getProduct(product.id);
 
                         }}
                       >
@@ -323,7 +284,7 @@ function ProductManagement() {
                       </button>
 
                       <button
-                        className='option-btn'
+className='option-btn'
                         onClick={function () {
                           Swal.fire({
                             title: `Bạn có chắc muốn xóa ${product.productName} chứ???`,
@@ -404,7 +365,7 @@ function ProductManagement() {
                         }}
                         onClick={() => imageUploader.current.click()}
                       >
-                        <img
+<img
                           ref={uploadedImage}
                           style={{
                             width: '100%',
@@ -431,13 +392,10 @@ function ProductManagement() {
                         id='productType'
                         onChange={(e) => setProductType(e.target.value)}
                       >
-                         {cates? cates.map((cate) => (
-                      <option value={cate.id}>{cate.name}</option>
-                    )): <span></span>}
-                        {/* <option value='1'>Nam</option>
+                        <option value='1'>Nam</option>
                         <option value='2'>Nữ</option>
                         <option value='3'>Trẻ em</option>
-                        <option value='4'>Trẻ Sơ Sinh</option> */}
+                        <option value='4'>Trẻ Sơ Sinh</option>
                       </select>
                     </div>
                     <div className='mt-3'>
@@ -448,7 +406,6 @@ function ProductManagement() {
                         type='text'
                         id='productName'
                         value={productName}
-                        maxLength='20'
                         onChange={(e) => setProductName(e.target.value)}
                       />
                     </div>
@@ -473,7 +430,6 @@ function ProductManagement() {
                         type='text'
                         id='productDescr'
                         rows='5'
-                        maxLength='200'
                         value={productDescr}
                         onChange={(e) => setProductDescr(e.target.value)}
                       ></textarea>
@@ -566,14 +522,13 @@ function ProductManagement() {
                         onClick={() => imageChanger.current.click()}
                       >
                         <img
-                          src={product.imageUrl}
+                          ref={changedImage}
                           style={{
                             width: '100%',
                             height: '100%',
                             borderRadius: '20px',
                           }}
-                          
-                          alt=''
+alt=''
                         />
                       </div>
                 
@@ -586,19 +541,15 @@ function ProductManagement() {
                 <div className='col'>
                   <div>
                     <label className='fw-bold'>Mã sản phẩm: </label>
-                    <label className='' id='productId'>{product.id}</label>
+                    <label className='' id='productId'></label>
                   </div>
                   <div className='mt-3'>
                     <label className='d-block fw-bold'>Tên Sản Phẩm</label>
-                    <input className='w-75' id='productNameEdit' maxLength='50'  defaultValue={product.productName}
-                    onChange={(e) => { 
-                      setProductName(e.target.value)
-                    }}
-                    ></input>
+                    <input className='w-75' id='productNameEdit'></input>
                   </div>
                   <div className='mt-3'>
                     <label className='d-block fw-bold'>Giá</label>
-                    <input className='w-75' id='productPriceEdit' value={vndFormat.format(product.price)}></input>
+                    <input className='w-75' id='productPriceEdit'></input>
                   </div>
                 </div>
                 <div className='col'>
@@ -608,13 +559,11 @@ function ProductManagement() {
                       className='w-75'
                       id='productDescrEdit'
                       rows='5'
-                      maxLength='300'
-                      value={product.descr}
                     ></textarea>
                   </div>
                   <div>
                     <label className='d-block fw-bold'>Số Lượng</label>
-                    <input className='w-75' id='productNumEdit' value={product.stock}></input>
+                    <input className='w-75' id='productNumEdit'></input>
                   </div>
                 </div>
               </div>
