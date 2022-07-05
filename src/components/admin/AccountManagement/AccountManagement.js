@@ -1,6 +1,25 @@
 import AdminSidebar from "./../SideBar/AdminSidebar";
 import AdminInfo from "./../adminInfo/AdminInfo";
+import { useEffect, useState } from "react";
+import { getAllUser } from "../../../service/userService";
+
 function AccountManagement() {
+  const [users, setUsers] = useState([]);
+
+  const loadUsers = () => {
+    getAllUser()
+      .then((response) => {
+        setUsers(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    loadUsers();
+  }, []);
+
   return (
     <>
       <div className="adminForm">
@@ -35,65 +54,21 @@ function AccountManagement() {
                   <th>Tên</th>
                   <th>Email</th>
                   <th>Số điện thoại</th>
-                  <th>Tổng hóa đơn</th>
-                  <th>Tổng thanh toán</th>
+                  <th>Địa chỉ</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Nguyễn</td>
-                  <td>Vạn Phi</td>
-                  <td>nvp@gmail.com</td>
-                  <td>02135466</td>
-                  <td>12</td>
-                  <td>1200000</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Nguyễn</td>
-                  <td>Thành Luân</td>
-                  <td>ntl@gmail.com</td>
-                  <td>021769876</td>
-                  <td>8</td>
-                  <td>1500000</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Hoàng</td>
-                  <td>Hữu Nghĩa</td>
-                  <td>hhn@gmail.com</td>
-                  <td>087335466</td>
-                  <td>15</td>
-                  <td>1400600</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Nguyễn</td>
-                  <td>Tiến Thành</td>
-                  <td>ntt@gmail.com</td>
-                  <td>0863746466</td>
-                  <td>8</td>
-                  <td>1402300</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>Nguyễn</td>
-                  <td>Phùng Thảo Nguyên</td>
-                  <td>nptn@gmail.com</td>
-                  <td>0576335466</td>
-                  <td>9</td>
-                  <td>120600</td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>Nguyễn</td>
-                  <td>Công Khanh</td>
-                  <td>nck@gmail.com</td>
-                  <td>085725466</td>
-                  <td>4</td>
-                  <td>1434500</td>
-                </tr>
+                {users &&
+                  users.map((user) => (
+                    <tr key={user.id}>
+                      <td>{user.id}</td>
+                      <td>{user.firstName}</td>
+                      <td>{user.lastName}</td>
+                      <td>{user.email}</td>
+                      <td>{user.phoneNumber}</td>
+                      <td>{user.address}</td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
