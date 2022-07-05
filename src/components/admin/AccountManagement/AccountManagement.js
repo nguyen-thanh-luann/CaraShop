@@ -1,41 +1,33 @@
-import AdminSidebar from './../SideBar/AdminSidebar';
-import AdminInfo from './../adminInfo/AdminInfo';
+import AdminSidebar from "./../SideBar/AdminSidebar";
+import AdminInfo from "./../adminInfo/AdminInfo";
 function AccountManagement() {
   return (
     <>
-      <div className='adminForm'>
+      <div className="adminForm">
         <AdminSidebar />
-        <div className='adminContainer'>
-          <div className='adminContent'>
+        <div className="adminContainer">
+          <div className="adminContent">
             {/* nav */}
-            <nav className='d-flex justify-content-between align-items-center'>
+            <nav className="d-flex justify-content-between align-items-center">
               <h4>
-                <i className='fa-solid fa-user me-2'></i>Khách Hàng / Quản lí
+                <i className="fa-solid fa-user me-2"></i>Khách Hàng / Quản lí
                 khách hàng
               </h4>
               <AdminInfo />
             </nav>
             {/* search */}
-            <div className='d-flex align-items-baseline'>
-            <div className='searchGroup mt-3 w-50'>
-              <i className='fa-solid fa-magnifying-glass'></i>
-              <input
-                type='text'
-                className='ms-2 w-80 p-0'
-                placeholder='Nhập họ, tên khách hàng.'
-              />
-            </div>
-            <div className='search-time-group ms-3 w-100'>
-              <input type='date' defaultValue='dd/mm/yyyy' className='w-25'/>
-              <i
-                className='fa-solid fa-arrow-right mx-2'
-           
-              ></i>
-              <input type='date' defaultValue='dd/mm/yyyy'  className='w-25'/>
-            </div>
+            <div className="d-flex align-items-baseline">
+              <div className="searchGroup mt-3 w-25">
+                <i className="fa-solid fa-magnifying-glass"></i>
+                <input
+                  type="text"
+                  className="ms-2 w-80 p-0"
+                  placeholder="Nhập họ, tên khách hàng."
+                />
+              </div>
             </div>
             {/* table */}
-            <table className='table mt-3 table-hover text-center align-middle'>
+            <table className="table mt-3 table-hover text-center align-middle">
               <thead>
                 <tr>
                   <th>ID</th>
