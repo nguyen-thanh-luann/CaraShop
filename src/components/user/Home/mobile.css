@@ -7,4 +7,9 @@
     min-width: 100%;
     height: 40vh;
   }
+  .ads3,
+  .ads4,
+  .ads5 {
+    display: none;
+  }
 }

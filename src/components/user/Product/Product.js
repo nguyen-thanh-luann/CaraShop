@@ -12,7 +12,6 @@ import './product.css';
 import './mobile.css';
 
 function Product() {
-
   let loginUser = localStorage.getItem('loginUser');
   let navigate = useNavigate();
   const { id } = useParams();
@@ -91,10 +90,7 @@ function Product() {
                   <i className='fas fa-star'></i>
                 </div>
               </div>
-              <p>
-                Một chiếc áo cần thiết cho tủ quần áo của bạn. Mang lại cảm giác
-                mịn màng, thoáng mát.
-              </p>
+              <p>{products.descr}</p>
               <hr></hr>
               <h5>Kích Cỡ</h5>
               <select className='form-select w-10'>
@@ -117,7 +113,7 @@ function Product() {
                 <button
                   className='btn btn-danger'
                   onClick={() => {
-                    if(loginUser){
+                    if (loginUser) {
                       send(products);
                       Swal.fire({
                         position: 'top-center',
@@ -126,7 +122,7 @@ function Product() {
                         showConfirmButton: false,
                         timer: 1000,
                       });
-                    }else{
+                    } else {
                       Swal.fire({
                         position: 'top-center',
                         icon: 'warning',
@@ -134,11 +130,8 @@ function Product() {
                         showConfirmButton: false,
                         timer: 1000,
                       });
-                      navigate('/login')
+                      navigate('/login');
                     }
-
-
-    
                   }}
                 >
                   Thêm Vào Giỏ Hàng
